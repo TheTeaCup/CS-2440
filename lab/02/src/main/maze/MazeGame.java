@@ -244,8 +244,6 @@ public class MazeGame {
             visit(newRow, newCol);
             setPlayerRow(newRow);
             setPlayerCol(newCol);
-            System.out.println("Player at: (" + newRow + ", " + newCol + ")");
-            System.out.println("Goal at: (" + getGoalRow() + ", " + getGoalCol() + ")");
             return playerAtGoal();
         } else {
             return false;
