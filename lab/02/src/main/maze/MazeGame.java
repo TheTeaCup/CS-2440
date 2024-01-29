@@ -171,8 +171,8 @@ public class MazeGame {
     }
 
     private boolean valid(int row, int col) {
-        return row >= 0 && row < HEIGHT && col >= 1 && col < WIDTH && !this.blocked[row][col];
-    }
+        return row >= 0 && row < HEIGHT && col >= 0 && col < WIDTH && !this.blocked[row][col];
+    }   
 
     private void visit(int row, int col) {
         this.visited[row][col] = true;
@@ -192,12 +192,6 @@ public class MazeGame {
                 String ch = fileScanner.next();
     
                 switch (ch) {
-                    case "1":
-                        this.blocked[i][j] = true;
-                        break;
-                    case "0":
-                        this.blocked[i][j] = false;
-                        break;
                     case "S":
                         this.start[0] = i;
                         this.start[1] = j;
@@ -207,6 +201,12 @@ public class MazeGame {
                     case "G":
                         this.goal[0] = i;
                         this.goal[1] = j;
+                        break;
+                    case "1":
+                        this.blocked[i][j] = true;
+                        break;
+                    case "0":
+                        this.blocked[i][j] = false;
                         break;
                     default:
                         break;
