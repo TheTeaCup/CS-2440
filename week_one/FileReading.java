@@ -13,6 +13,7 @@ public class FileReading {
                     nums[i][j] = fileIn.nextInt();
                 }
             }
+            fileIn.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
         }

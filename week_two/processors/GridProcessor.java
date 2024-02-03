@@ -26,6 +26,7 @@ public class GridProcessor {
 
             this.grid = grid;
 
+            inputFile.close();
         } 
         catch (FileNotFoundException e) {
             System.out.printf("Could not find file at %s\n", filename);

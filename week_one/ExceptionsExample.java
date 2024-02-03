@@ -20,9 +20,11 @@ public class ExceptionsExample {
             if (x < 0) 
             {
                 // unchecked exception
+                kb.close();
                 throw new IllegalArgumentException("Need a postive int.");
             }
             System.out.println(x);
+            kb.close();
 
         }
         catch (InputMismatchException | FileNotFoundException e) {
