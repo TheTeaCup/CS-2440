@@ -1,5 +1,8 @@
 package client;
 
+import library.Book;
+import library.BookReader;
+
 /**
  * Demo used to manually test the program.
  * 
@@ -15,6 +18,10 @@ public class Demo
      */
     public static void main(String[] args) 
     {
-        // add your manual tests here.
+        BookReader bR = new BookReader("data/bookdata.txt");
+        for (Book b : bR.getBooks())
+        {
+            System.out.println(b.toString());
+        }
     }
 }

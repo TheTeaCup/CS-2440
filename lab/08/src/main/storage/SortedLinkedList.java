@@ -285,26 +285,22 @@ public class SortedLinkedList
             {
                 throw new IllegalStateException();
             }
-
-            if (prevNode == null)
-            {
-                throw new UnsupportedOperationException();
-            }
-        
-            if (head == prevNode)
-            {
-                head = head.getLink();
-            }
             else
             {
-                prevNode.setLink(currNode);
+                calledNext = false;
+                if (head == prevNode)
+                {
+                    head = head.getLink();
+                }
+                else
+                {
+                    prevNode.setLink(currNode);
+                }
+            
+                currNode = prevNode.getLink();
+    
+                length--;
             }
-        
-            currNode = prevNode.getLink();
-            nextNode = currNode != null ? currNode.getLink() : null;
-            calledNext = false;
-            prevNode = null;
-            length--;
         }        
     }
 }
