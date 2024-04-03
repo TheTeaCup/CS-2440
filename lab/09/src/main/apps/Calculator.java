@@ -1,8 +1,16 @@
 package apps;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Calculator
 {
@@ -21,9 +29,6 @@ public class Calculator
     {
         createFrame();
         initializeComponents();
-        initializeButtons();
-        initializeInput();
-        initializeResult();
         displayFrame();
     }
 
@@ -42,37 +47,90 @@ public class Calculator
 
     private void initializeComponents()
     {
-
+        initializeButtons();
+        initializeInput();
+        initializeResult();
     }
 
     private void displayFrame()
     {
-
+        this.frame.pack();
+        this.frame.setVisible(true);
     }
 
     private void initializeInput()
     {
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
+        infixExpression = new JTextField(20);
+        infixExpression.setName("infixExpression");
+        inputPanel.add(infixExpression);
+
+        frame.add(inputPanel, BorderLayout.NORTH); 
     }
 
     private void initializeResult()
     {
+        JPanel resultPanel = new JPanel(new BorderLayout());
+        
+        resultLabel = new JLabel(RESULT_PREAMBLE);
+        resultLabel.setName("resultLabel");
+        resultPanel.add(resultLabel, BorderLayout.CENTER);
 
+        frame.add(resultPanel, BorderLayout.CENTER);
     }
 
     private void initializeButtons()
     {
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
 
+        JButton calculateButton = new JButton("Calculate");
+        calculateButton.setName("calculateButton");
+        calculateButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+                String result = calculate();
+                updateResult(result); 
+            }
+        });
+        buttonPanel.add(calculateButton);
+
+        JButton clearButton = new JButton("Clear");
+        clearButton.setName("clearButton");
+        clearButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                infixExpression.setText("");
+                resultLabel.setText(RESULT_PREAMBLE);
+            }
+        });
+        buttonPanel.add(clearButton);
+
+        frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private String calculate()
     {
-        ExpressionEvaluator evaluator = new ExpressionEvaluator();
-        return "";
+        String postfixExpression = ExpressionEvaluator.toPostfix(infixExpression.getText());
+        
+        if (postfixExpression == null) 
+        {
+            return ERROR_MESSAGE;
+        }
+    
+        double result = ExpressionEvaluator.evaluate(postfixExpression);
+        if (Double.isNaN(result)) 
+        {
+            return ERROR_MESSAGE; // do i make it say Error NaN ??
+        }
+    
+        return "Result = " + result;
     }
 
     private void updateResult(String result)
     {
-
+        resultLabel.setText(result);
     }
 }
