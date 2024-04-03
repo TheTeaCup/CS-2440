@@ -3,8 +3,8 @@ package client;
 /**
  * Demo used to manually test the program.
  * 
- * @author 
- * @version 
+ * @author Hunter.Wilson
+ * @version 04.02.2024
  */
 public class Demo
 {
